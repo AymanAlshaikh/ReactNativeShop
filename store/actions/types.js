@@ -10,5 +10,7 @@ export const DELETE_SHOP = "DELETE_SHOP";
 export const UPDATE_SHOP = "UPDATE_SHOP";
 export const FETCH_SHOP = "FETCH_SHOP";
 
+export const FETCH_CART = "FETCH_CART";
+
 //auth ACTION TYPES
 export const SET_USER = "SET_USER";

@@ -1,31 +1,47 @@
-import { Spinner } from "native-base"
-import React from "react"
-import { Image, Text, View } from "react-native"
-import { useSelector } from "react-redux"
-import ProductList from "./ProductList"
+import { Button, Spinner } from "native-base";
+import React from "react";
+import { Image, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import ProductList from "./ProductList";
 
+const ShopDetail = ({ route, navigation }) => {
+  const { shop } = route.params;
+  const allProducts = useSelector((state) => state.productReducer.products);
+  const shopLoading = useSelector((state) => state.shopReducer.loading);
+  const productLoading = useSelector((state) => state.productReducer.loading);
+  //const shops = useSelector((state) => state.shopReducer.shop);
+  console.log(allProducts);
+  if (shopLoading || productLoading)
+    return <Spinner color="red" loading={true} size={150} />;
 
-const ShopDetail = () => {
-    const loading = useSelector((state) => state.shopReducer.loading)
-    const shops = useSelector((state) => state.shopReducer.shop)
-    console.log(shops)
+  const shopProducts = shop.products.map((product) =>
+    allProducts.find((_product) => _product.id === product.id)
+  );
 
-
-    if (!loading)
-        return (
-            <>
-                <Text>
-                    {shops[0].name}
-                </Text>
-                <Image
-                    source={{ uri: shops[0].image ?? "https://docs.expo.io/static/images/android-studio-build-tools.png" }}
-                    style={{ width: 400, height: 400 }}
-                />
-                <ProductList />
-            </>
-
-        )
-    else return <Spinner color="red" loading={true} size={150} />
-
-}
+  return (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Button onPress={() => navigation.navigate("CartList")}>
+        <Text>Cart</Text>
+      </Button>
+      <Text>{shop.name}</Text>
+      <Image
+        source={{
+          uri:
+            shop.image ??
+            "https://docs.expo.io/static/images/android-studio-build-tools.png",
+        }}
+        style={{ width: 100, height: 100 }}
+      />
+      <ProductList products={shopProducts} navigation={navigation} />
+    </View>
+  );
+  //   else return <Spinner color="red" loading={true} size={150} />;
+};
 export default ShopDetail;
