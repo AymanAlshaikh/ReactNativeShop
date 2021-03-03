@@ -10,7 +10,11 @@ export const DELETE_SHOP = "DELETE_SHOP";
 export const UPDATE_SHOP = "UPDATE_SHOP";
 export const FETCH_SHOP = "FETCH_SHOP";
 
+//CART ACTION TYPES
 export const FETCH_CART = "FETCH_CART";
+export const ADD_ITEM = "ADD_ITEM";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const CHECKOUT = "CHECKOUT";
 
 //auth ACTION TYPES
 export const SET_USER = "SET_USER";

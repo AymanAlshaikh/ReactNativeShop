@@ -1,4 +1,4 @@
-import { Button, Text } from "native-base";
+import { Button, Left, ListItem, Text } from "native-base";
 import React from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import ShopItem from "./ShopItem";
 
 const ShopList = ({ navigation }) => {
   const shops = useSelector((state) => state.shopReducer.shop);
-  console.log(shops);
+
   const list = shops.map((shop) => (
     <ShopItem navigation={navigation} shop={shop} key={shop.id} />
   ));
@@ -19,10 +19,7 @@ const ShopList = ({ navigation }) => {
         alignItems: "center",
       }}
     >
-      <Button onPress={() => navigation.navigate("CartList")}>
-        <Text>Cart</Text>
-      </Button>
-      {list}
+      <View>{list}</View>
     </View>
   );
 };

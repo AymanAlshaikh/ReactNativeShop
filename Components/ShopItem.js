@@ -1,4 +1,4 @@
-import { Button } from "native-base";
+import { Button, Icon } from "native-base";
 import React from "react";
 import { Text, View } from "react-native";
 import shopReducer from "../store/reducers/shopReducer";
@@ -13,9 +13,12 @@ const ShopItem = ({ shop, navigation }) => {
         alignItems: "center",
       }}
     >
-      <Button onPress={() => navigation.navigate("ShopDetail", { shop: shop })}>
-        <Text>{shop.name}</Text>
-      </Button>
+      <Icon
+        type="FontAwesome5"
+        name="store"
+        onPress={() => navigation.navigate("ShopDetail", { shop: shop })}
+      />
+      <Text>{shop.name}</Text>
     </View>
   );
 };

@@ -1,13 +1,19 @@
-import { List } from "native-base";
+import { List, ListItem, Spinner } from "native-base";
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
+import CheckOutButton from "./Buttons/CheckOutButton";
 import CartItem from "./CartItem";
 
 const CartList = ({ navigation }) => {
   const products = useSelector((state) => state.productReducer.products);
   const items = useSelector((state) => state.cartReducer.items);
-  // const loading = useSelector((state) => state.productReducer.loading)
+  const loading = useSelector((state) => state.productReducer.loading);
+
+  let total = 0;
+  items.forEach((item) => (total += item.quantity));
+
+  if (loading) return <Spinner color="red" loading={true} size={150} />;
 
   const cartItem = items.map((item) => ({
     ...products.find((product) => product.id === item.productId),
@@ -15,10 +21,9 @@ const CartList = ({ navigation }) => {
   }));
 
   const list = cartItem.map((item) => (
-    <CartItem item={item} key={item.name} navigation={navigation} />
+    <CartItem item={item} key={item.id} navigation={navigation} />
   ));
 
-  //if (!loading)
   return (
     <List
       style={{
@@ -28,9 +33,10 @@ const CartList = ({ navigation }) => {
         alignItems: "center",
       }}
     >
+      <CheckOutButton />
       {list}
+      <Text>total: {total}</Text>
     </List>
   );
-  //else return <Spinner color="red" loading={true} size={150} />;
 };
 export default CartList;

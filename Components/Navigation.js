@@ -6,6 +6,7 @@ import ShopList from "./ShopList";
 import ProductDetail from "./ProductDetail";
 import shopReducer from "../store/reducers/shopReducer";
 import CartList from "./CartList";
+import CartButton from "./Buttons/CartButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -22,12 +23,18 @@ const RootNavigator = () => {
     >
       <Screen options={{ headerShown: false }} name="Home" component={Home} />
       <Screen
-        options={{ title: "find a shop" }}
+        options={{
+          title: "find a shop",
+          headerRight: () => <CartButton />,
+        }}
         name="ShopList"
         component={ShopList}
       />
       <Screen
-        options={{ title: "shop" }}
+        options={{
+          title: "shop",
+          headerRight: () => <CartButton />,
+        }}
         name="ShopDetail"
         component={ShopDetail}
       />

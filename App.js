@@ -2,14 +2,21 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
-import Home from "./Components/Home";
-import ShopDetail from "./Components/ShopDetail";
-import ShopList from "./Components/ShopList";
 import store from "./store";
 import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./Components/Navigation";
+import { Spinner, Container } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 export default function App() {
+  const [loaded] = useFonts({
+    Roboto: require("native-base/Fonts/Roboto.ttf"),
+    Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+    ...Ionicons.font,
+  });
+
+  if (!loaded) return <Spinner color="#132D4B" />;
   return (
     <Provider store={store}>
       <NavigationContainer>

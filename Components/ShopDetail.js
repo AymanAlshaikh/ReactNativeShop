@@ -10,7 +10,7 @@ const ShopDetail = ({ route, navigation }) => {
   const shopLoading = useSelector((state) => state.shopReducer.loading);
   const productLoading = useSelector((state) => state.productReducer.loading);
   //const shops = useSelector((state) => state.shopReducer.shop);
-  console.log(allProducts);
+
   if (shopLoading || productLoading)
     return <Spinner color="red" loading={true} size={150} />;
 
@@ -27,9 +27,6 @@ const ShopDetail = ({ route, navigation }) => {
         alignItems: "center",
       }}
     >
-      <Button onPress={() => navigation.navigate("CartList")}>
-        <Text>Cart</Text>
-      </Button>
       <Text>{shop.name}</Text>
       <Image
         source={{
@@ -39,6 +36,7 @@ const ShopDetail = ({ route, navigation }) => {
         }}
         style={{ width: 100, height: 100 }}
       />
+
       <ProductList products={shopProducts} navigation={navigation} />
     </View>
   );
