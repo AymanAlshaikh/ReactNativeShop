@@ -28,7 +28,7 @@ const cartReducer = (state = initialState, action) => {
       else
         return {
           ...state,
-          items: [...state.items, { ...newItem, quantity: 1 }],
+          items: [...state.items, newItem],
         };
     case types.DELETE_ITEM:
       return {
